@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Programación avanzada en R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Creative Commons Attribution 4.0 International License" />
+    <link href="taller_funciones-propias_files/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="taller_funciones-propias_files/tile-view-0.2.6/tile-view.js"></script>
+    <link href="taller_funciones-propias_files/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="taller_funciones-propias_files/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="taller_funciones-propias_files/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="taller_funciones-propias_files/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="taller_funciones-propias_files/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="taller_funciones-propias_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="taller_funciones-propias_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x010b96e8f6c4fe88284b62aa009889b","expires":1}</script>
+    <script src="taller_funciones-propias_files/himalaya-1.1.0/himalaya.js"></script>
+    <script src="taller_funciones-propias_files/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="taller_funciones-propias_files/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="taller_funciones-propias_files/editable-0.2.6/editable.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Programación avanzada en R
+## Escuela de Invierno - Julio 2021 <br> Gabriela Mathieu
+### <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+
+---
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.code-bg-palegreen .remark-code, .code-bg-palegreen .remark-code * {
+ background-color:palegreen!important;
+}
+
+.code-bg-skyblue .remark-code, .code-bg-skyblue .remark-code * {
+ background-color:skyblue!important;
+}
+&lt;/style&gt;
+
+
+
+# ¿Qué haremos hoy?
+
+- Buenas prácticas al escribir código en R
+
+- Escribir funciones en R
+
+- Estructura de una función
+
+- Programación defensiva
+
+---
+# Buenas prácticas al escribir código R
+
+- Usa un estilo coherente dentro de tu código.
+&lt;br&gt;&lt;br&gt;
+--
+
+- La coherencia hace que el código sea más fácil de leer y los problemas más fáciles de detectar.
+&lt;br&gt;&lt;br&gt;
+--
+
+- Mantener en lo posible los scripts, datos, salidas en un mismo directorio.
+&lt;br&gt;&lt;br&gt;
+--
+
+- Usa rutas relativas para acceder a esos archivos.
+&lt;br&gt;&lt;br&gt;
+--
+
+-  Usa Rproj y el paquete here
+&lt;br&gt;&lt;br&gt;
+--
+
+- Usa control de versiones aunque trabajes de forma individual.
+&lt;br&gt;&lt;br&gt;
+--
+
+- No guardes el espacio de trabajo (workspace), esto puede generar resultados inesperados. Empieza en un entorno limpio cada vez.
+&lt;br&gt;&lt;br&gt;
+--
+
+- Evita el hard-coding!
+
+---
+# ~~Save workspace~~
+
+
+&lt;img src="img/funciones/saveworkspace.gif" width="30%" style="display: block; margin: auto;" /&gt;
+ 
+    
+&lt;!-- Todo esto nos lleva a escribir funciones para hacer nuestro código más legible y modular. --&gt;
+
+
+---
+# Nombres
+
+- Es preferible que los nombres de los objetos, archivos y funciones propias sean en minúscula. 
+- Si tienen más de un término que estén separados por guión bajo (_) 
+- Uno de los creadores de Tidyverse, Hadley Wickham recomienda usar sustantivos para los nombres de los objetos y verbos para las funciones
+- Elegir nombres concisos y descriptivos para los objetos y las funciones.
+- No utilizar tildes y eñes en los nombres de los objetos ni las funciones.
+- Los scripts de R deben terminar con la extensión .R
+- Evita usar nombres de funciones comunes, palabras reservadas o valores predeterminados de R para nombrar a tus objetos o funciones
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+dia_uno
+dia_1
+```
+]
+]
+
+.pull-right[
+.code-bg-skyblue[
+
+```r
+# -1
+DiaUno
+diauno
+día_uno
+
+T &lt;- FALSE
+c &lt;- 10
+mean &lt;- function(x) sum(x)
+```
+]
+
+]
+
+
+---
+# Uso de los espacios
+
+Antes y después de la mayoría de los operadores hay que dejar un espacio. 
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+x &lt;- sqrt(2 + 4 -1)
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+x &lt;- sqrt(2+4-1)
+```
+]
+]
+&lt;br&gt;&lt;br&gt;
+--
+
+
+Las excepciones a esta regla son cuando usamos `:`, `::`, `$`, `^`, etc. 
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+vector &lt;- 1:10
+dplyr::select(1)
+x &lt;- sqrt(y^2 + z^4)
+df$x
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+vector &lt;- 1 : 10
+dplyr :: select(1)
+x &lt;- sqrt(y ^ 2 + z ^ 4)
+df $x
+```
+]
+]
+--
+
+---
+# Uso de los espacios
+
+No hay que dejar espacios antes de una coma, pero sí después.
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1 
+v &lt;- c(1, 2, 3)
+x[, 1]
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+v &lt;- c(1,2,3)
+x[ ,1]
+x[,1]
+x[ , 1]
+```
+]
+]
+
+--
+
+Antes del paréntesis izquierdo va un espacio, a no ser que estemos llamando a una función.
+
+Dejar un espacio antes y después de () cuando se utiliza if, for o while
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+if (x &gt; 2) {
+  print(x)
+}
+
+
+mean(1:10)
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+if(x&gt;2){
+  print(x)
+}
+
+mean (1:10)
+mean( 1:10)
+```
+]
+]
+
+---
+# Uso de espacios (función propia)
+
+Agrega un espacio después de ()
+
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+function(x) {}
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+function (x) {}
+function(x){}
+```
+]
+]
+
+---
+# Uso del punto y coma
+
+- Se recomienda no usar punto y coma para escribir en la misma línea dos o más expresiones
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+x &lt;- 1
+y &lt;- 2
+z &lt;- 3
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+x &lt;- 1; y &lt;- 2; z &lt;- 3
+```
+]
+]
+
+
+---
+# Uso de llaves
+
+- Al abrir una llave, el bloque de código debe agregarse en una siguiente línea 
+- El bloque de código al interior de las llaves debe estar alineado a dos espacios
+- La llave que cierra siempre tiene que ir su propia línea, a menos que se trate de else. 
+- En general, usaremos llaves aunque el cuerpo de la estructura de control contenga sólo una instrucción.
+
+Dentro de las llaves utilizaremos sangrado para indicar que se trata de un bloque de instrucciones.
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+if (x &lt; 2) {
+  "mayor"
+} else {
+  "menor"
+}
+
+if (x == 0) {
+  "cero"
+}
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1 
+if (1 &lt; 2) 
+{
+"mayor"
+} 
+else {
+"menor"
+}
+
+if (x == 0) 
+"cero"
+```
+]
+]
+
+---
+# Asignación
+
+En la instrucción de asignación se aconseja el uso del operador &lt;- en lugar de =, reservando este último para declarar argumentos dentro de las funciones.
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+# +1
+x &lt;- 2
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+# -1
+x = 2
+x&lt;-2
+```
+]
+]
+
+---
+# Longitud de lineas
+
+Trata de limitar tu código a una longitud de 80 caracteres por linea. 
+
+Esto cabe cómodamente en una página impresa a un tamaño de la fuente razonable.
+
+![](img/funciones/longitud_codigo.gif)&lt;!-- --&gt;
+
+---
+# Sangría o espacios extras
+
+- Usa dos espacios para añadir una sangría a tu código.
+- Podés setear la tecla TAB para que deje por defecto dos espacios. 
+- Una excepción es para alinear los argumentos de una función.
+
+
+```r
+nombre_de_funcion &lt;- function(argumento_1 = NULL,
+                              argumento_2 = "2020-06-11",
+                              argumento_3 = "") {
+  # desde aquí usamos la sangría de dos espacios otra vez
+}
+```
+
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+df &lt;- df %&gt;% mutate(
+  x = y*z,
+  x2 = x*2
+)
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+]
+]
+
+---
+# Evita el hard-coding
+
+Otra forma de ser explícito sobre los requisitos de tu código y mejorar su reproducibilidad es limitar el "hard-coding" de los archivos de entrada y salida de tu script. Si su código va a leer datos de un archivo, defina una variable al principio de su código que almacene la ruta a ese archivo. Por ejemplo
+
+En el caso de las funciones, agrega las rutas como argumentos
+
+
+.pull-left[
+.code-bg-palegreen[
+
+```r
+input_file &lt;- "data/athletes.csv" 
+output_file &lt;- "data/athletes_tidy.csv"
+
+# lee los datos
+input_data &lt;- read.csv(input_file)
+# guarda los datos
+write.table(input_data, output_file)
+```
+]
+]
+
+.pull-left[
+.code-bg-skyblue[
+
+```r
+input_data &lt;- read.csv("data/athletes.csv")
+write.table(input_data, "data/athletes_tidy.csv")
+```
+]
+]
+
+---
+# ~~setwd()~~ ~~rm(list = ls())~~
+
+&lt;img src="img/funciones/hadley_jenny.png" width="634" 200% /&gt;
+
+.pull-left[
+&lt;img src="img/funciones/jenny1.jpeg" width="1037" height="10%" /&gt;
+
+]
+
+.pull-right[
+&lt;img src="img/funciones/jenny2.jpeg" width="1012" height="10%" /&gt;
+
+
+]
+---
+# Comenta el script y crea secciones
+
+Recomendamos documentar el código mediante el uso de comentarios. Cada linea debe comenzar con el signo numeral (#) seguido de un espacio en blanco.
+
+Con cuatro numerales a la derecha se crean secciones 
+
+&lt;img src="img/funciones/secciones.gif" height="10%" /&gt;
+
+---
+# Orden dentro de un script
+
+- Carga todos los paquetes al inicio: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;pacman::p_load()&lt;/span&gt;
+&lt;br&gt;&lt;br&gt;
+--
+
+- Define las opciones globales, rutas al inicio
+&lt;br&gt;&lt;br&gt;
+--
+
+- Llama a todo el código al principio: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;source()&lt;/span&gt;
+&lt;br&gt;&lt;br&gt;
+--
+
+- En lo posible llama a todos los archivos de datos en la parte superior
+
+
+&lt;img src="img/funciones/code_order.png" width="434" 100% /&gt;
+
+---
+# Paquete styler 
+
+- Además del atajo CTRL + SHIFT + a para estilizar el código hay paquetes específicos.
+- Al instalarlo se agrega un addin. 
+- Se puede definir el [estilo de tidyverse](https://style.tidyverse.org/index.html)
+- Otro paquete similar es lintr.
+
+![](img/funciones/styler.gif)&lt;!-- --&gt;
+---
+Ejemplo
+
+
+![](img/funciones/hard_coding.gif)&lt;!-- --&gt;
+
+---
+class: inverse, center, middle
+# Escribir funciones propias
+
+---
+# Objetivo de una función
+
+.left-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+![](https://media.giphy.com/media/md3zIoFZxo176zhD53/giphy.gif)
+]
+
+.right-column[
+- El propósito de una función debe ser hacer &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;una sola cosa&lt;/span&gt;.
+&lt;br&gt;
+
+- Si una función hace más de una cosa puede convertirse en más de una función y luego combinarlas en otra función.
+&lt;br&gt;
+
+- De esto se trata escribir &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;código modular&lt;/span&gt;. 
+&lt;br&gt;
+
+- Si en el futuro hay que arreglar algo, es más claro cuál es la parte del código que hay que arreglar. 
+&lt;br&gt;
+
+- Esto minimiza errores y hace un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;código más legible&lt;/span&gt;.
+&lt;br&gt;
+
+- Una función reduce unas cuantas líneas de código en una.
+
+]
+
+---
+# Para que sirve
+
+.left-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+![](https://media.giphy.com/media/EXvj6EsTB63YI/giphy.gif)
+]
+
+.right-column[
+- Para &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;reducir las repeticiones&lt;/span&gt; en nuestro código.
+
+- Es preferible escribir una función que hacer copy-paste
+
+- Reducir la repetición de código tiene varias ventajas:
+
+    - Es &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;más fácil de entender&lt;/span&gt; que hace el código, porque te enfocas en ver las diferencias y no lo que se repite.
+
+    - Si es necesario cambiar algo es más fácil hacerlo en una función que en código duplicado. &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Minimiza errores&lt;/span&gt; cambiar en un solo lugar que en varios. 
+
+    - Si hay un error ese error se multiplica cada vez que aparece ese código repetido.
+
+]
+
+---
+# ¿Cuándo y para qué escribir una función?
+
+- Es común que tengamos que repetir ciertas tareas o tenemos que compartir código con
+otras personas. 
+
+- Esas "otras personas" podés ser vos misma/o en el futuro.
+
+- Un código más abstracto y simple... más trabajo al principio, más fácil después.
+
+- En general, empezamos a escribir un código y luego nos damos cuenta que deberíamos estar escribiendo una función o directamente un paquete.
+
+- Ya sea que escribas código suelto o una función es importante que el código sea legible y esté bien documentado.
+
+- Esto es clave para la reproducibilidad. 
+
+---
+# Función
+
+&lt;!-- https://bookdown.org/content/d1e53ac9-28ce-472f-bc2c-f499f18264a3/func.html --&gt;
+
+En R, definimos una función con la siguiente construcción:
+
+
+```r
+nombre_funcion &lt;- function(argumentos) {
+  cuerpo_funcion
+}
+```
+
+- A la función se le asigna un nombre
+- Se la crea con la palabra reservada function
+- Se definen argumentos dentro de los ()
+- Se define el cuerpo de la función dentro de las llaves. Acá van las instrucciones que realizan una tarea y producen valores de retorno.
+
+
+---
+# Argumentos
+
+
+- Los argumentos son los inputs de la función
+
+- Los resultados o valores de retorno son los outputs
+
+- Para definir los argumentos que tendrá una función, debemos identificar que aspectos de un bloque de código queramos que sean modificables
+
+- Debemos abstraer esto y pasarlo a argumentos
+
+
+---
+# Ejemplo
+
+- Voy a crear una función que pase de metros a centímetros
+
+
+```r
+cm2mt &lt;- function() {
+  mts/100
+}
+```
+--
+- Quiero que mts varíe así que lo pongo como argumento.
+
+
+```r
+cm2mt &lt;- function(mts) {
+  mts/100
+}
+```
+
+---
+# Uso
+
+- Uso la función poniendo 160 como input
+
+
+```r
+# nombrando el argumento
+cm2mt(mts = 160)
+
+# sin nombrar el argumento
+cm2mt(160)
+
+# si paso un texto da error
+cm2mt("160")
+```
+
+
+---
+# Ejemplo
+
+- Defino una función que calcula el índice de masa corporal 
+
+- El IMC se define como peso(kg)/altura(mts)^2
+
+.can-edit[
+
+```r
+function() {
+  
+}
+```
+
+```
+function() {
+  
+}
+```
+
+]
+
+
+---
+# Ejercicio
+
+- Utiliza el código en el que cargamos varios archivos juntos y genera una función 
+
+```r
+data_path &lt;- here::here("data")
+
+files &lt;- list.files(path = data_path, 
+                    pattern = "*.RDS",
+                    full.names = TRUE)
+
+for (i in 1:length(files)) {                              
+  assign(paste0("sport", i), 
+         readRDS(files[i]))
+}
+```
+
+
+- A la función assign debo agregarle el argumento envir = globalenv()
+
+&lt;!-- --- --&gt;
+&lt;!-- # ¿Qué es un enviroment (entorno) en R? --&gt;
+
+&lt;!-- - El globalenv(), o entorno global, es el entorno en el que normalmente trabajamos. --&gt;
+
+&lt;!-- - El baseenv(), o entorno base, es el entorno del paquete base --&gt;
+
+
+---
+# return()
+
+- Con la función return() se explicita los resultados de una función.
+
+- De lo contrario devolverá el último objeto generado.
+
+- Los argumentos deben ser un objeto o una lista de objetos
+
+---
+# Ejemplo 
+
+- Creo una función que quita todos los caracteres que no son texto de un vector.
+
+- Como input defino un vector character y como output un vector character modificado.
+
+
+```r
+limpia_texto &lt;- function(x){
+  
+  x &lt;- stringr::str_replace_all(x, "[[:punct:][:digit:]]", "") 
+  
+  return(x)
+}
+```
+--
+
+```r
+limpia_texto &lt;- function(x){
+  
+  x &lt;- stringr::str_replace_all(x, "[:punct:]|[:digit:]", "") 
+  
+  return(x)
+}
+```
+
+- En este caso no es necesario usar return() porque por defecto va a devolver x.
+
+---
+# Ejemplo
+
+- Lee los datos atletas_uy.csv
+
+- Aplica la función limpia_texto() para limpiar los nombres
+
+.can-edit[
+
+```r
+# leo los datos
+
+# modifico la variable nombre
+```
+
+]
+
+---
+# Ejercicio 
+
+- Crear una función que elimine tildes y diéresis 
+
+- Aplicarla a los datos de "atletas_uy.csv"
+
+---
+# Uso de paquetes y definición de rutas
+
+- No cargar paquetes dentro de una función
+- Usar `&lt;paquete::funcion()&gt;`
+
+
+```r
+stringr::str_replace_all("Ñ", "N")
+```
+- No debe quedar duda de que paquete es la función a menos que sea una función de R base, en ese caso no es necesario explicitar ningún paquete.
+
+- Cuando desarrollamos un paquete, vamos a usar algunas herramientas que nos van a advertir si nos olvidamos de declarar el paquete.
+
+- No definir rutas dentro de funciones.
+
+- Incorporar las rutas como argumentos.
+
+
+---
+# Programación defensiva
+
+.left-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+![](https://media.giphy.com/media/KhxHqhDJFEJuo/giphy.gif)
+]
+.right-column[
+- La programación defensiva significa anticipar y evitar los problemas antes de que ocurran.
+
+- La clave de la programación defensiva es saber qué requiere la función que estamos programando y hacer afirmaciones formales sobre esos requisitos.
+
+- Conviene cortar la ejecución de una función al inicio cuando se detecta que los valores de los argumentos no son los esperados.
+
+
+- Si la función realiza una operación aritmética, deberé chequear que los inputs sean números y en caso contrario cortar la ejecución de la función.
+
+- Como resultado de un error de la función debería indicarse un mensaje informativo de porqué la función se detuvo.
+
+
+]
+
+---
+# stopifnot()
+
+- Una función util para provocar un error al incio de la función chequeando los inputs.
+--
+
+- Defino la condición que debe cumplirse 
+
+
+```r
+x &lt;- 1
+
+stopifnot(is.character(x))
+```
+--
+- En general, el mensaje que devuelve no es demasiado informativo
+--
+
+- Es una forma abreviada de usar if con la función stop()
+
+
+```r
+if (!is.character(x)) {
+  stop("x no es character")
+}
+```
+
+---
+# assertthat
+
+- Algunos paquetes que permiten mejorar los mensajes de error son checkmate, assertive, assertr y assertthat. 
+
+- Vamos a usar assertthat. 
+
+- La función assert_that() declara una condición como true que se le define, si no se cumple devuelve un error.
+--
+
+
+```r
+x &lt;- 1
+
+assertthat::assert_that(is.character(x))
+```
+- Los mensajes que proveen las funciones de assertthat son mucho más informativos que los de la función stopifnot().
+
+
+- Además puedo definir un mensaje de error determinado.
+
+---
+# Ejemplo 
+
+En la función sin_tilde() podríamos agregar al comienzo: 
+
+
+```r
+assertthat::assert_that(is.character(x), msg = "x debe ser texto")
+```
+--
+
+- Con el paquete [glue](https://glue.tidyverse.org/reference/glue.html) podemos mejorar este mensaje
+
+- Dentro de glue(), defino entre llaves al argumento que estoy haciendo referencia, esto devolverá el valor que ese argumento tome.
+
+
+```r
+assertthat::assert_that(is.character(x), msg = glue::glue("{x} debe ser texto"))
+```
+
+
+---
+# Ejercicio
+
+- Toma la función del ejercicio 1 y agregale los assert que consideres necesarios.
+
+- Utiliza el paquete glue para definir un mensaje específico
+
+- Chequea que la función de los resultados esperados
+
+---
+# Ejercicio 
+
+Toma el código de la clase pasada y construye una función
+
+
+```r
+library(readr)
+data_names &lt;- c("sport1", "sport2", "sport3", "sport4") 
+for (i in 1:length(data_names)) {     
+  write_csv(get(data_names[i]),
+            here::here(data_path, paste0("sport", i, ".csv"))
+            )              
+}
+```
+
+- Como sugerencia te propongo utilizar alguna de estas funciones dir.exists(), try(), dir.create(). El paquete fs provee algunas funciones con cometidos similares.
+
+---
+# source()
+
+- Las funciones propias quedan disponibles para utilizar si las cargamos en cada sesión a la memoria de R.
+
+- Una forma fácil es llamando en el script a la función source() e indicando como argumento el archivo .R donde se encuentra la función. 
+
+- Si en ese archivo hay más de una función se cargarán todas a la memoria.
+
+- Otra forma que requiere algo más de trabajo, pero no tanto, es desarrollar un paquete que contenga esas funciones. 
+
+- El paquete puede estar disponible solo localmente o en un webservice como github o gitlab.
+
+
+---
+# Referencias
+
+- [R for Data Science](https://r4ds.had.co.nz/functions.html)
+- [Advanced R](http://adv-r.had.co.nz/Style.html)
+- [Best coding practices for R](https://bookdown.org/content/d1e53ac9-28ce-472f-bc2c-f499f18264a3/)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
