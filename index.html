@@ -4,31 +4,38 @@
     <title>Programación avanzada en R</title>
     <meta charset="utf-8" />
     <meta name="author" content="  Creative Commons Attribution 4.0 International License" />
-    <link href="taller_funciones-propias_files/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
-    <script src="taller_funciones-propias_files/tile-view-0.2.6/tile-view.js"></script>
-    <link href="taller_funciones-propias_files/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
-    <link href="taller_funciones-propias_files/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
-    <script src="taller_funciones-propias_files/freezeframe-5.0.2/freezeframe.min.js"></script>
-    <script src="taller_funciones-propias_files/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script src="index_files/header-attrs-2.14/header-attrs.js"></script>
+    <link href="index_files/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="index_files/tile-view-0.2.6/tile-view.js"></script>
+    <link href="index_files/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="index_files/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="index_files/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="index_files/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
-    <script src="taller_funciones-propias_files/clipboard-2.0.6/clipboard.min.js"></script>
-    <link href="taller_funciones-propias_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
-    <script src="taller_funciones-propias_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script src="index_files/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="index_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x010b96e8f6c4fe88284b62aa009889b","expires":1}</script>
-    <script src="taller_funciones-propias_files/himalaya-1.1.0/himalaya.js"></script>
-    <script src="taller_funciones-propias_files/js-cookie-3.0.0/js.cookie.js"></script>
-    <link href="taller_funciones-propias_files/editable-0.2.6/editable.css" rel="stylesheet" />
-    <script src="taller_funciones-propias_files/editable-0.2.6/editable.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x88d843cd3a743cab14c976cd280981d","expires":1}</script>
+    <script src="index_files/himalaya-1.1.0/himalaya.js"></script>
+    <script src="index_files/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="index_files/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="index_files/editable-0.2.6/editable.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Programación avanzada en R
-## Escuela de Invierno - Julio 2021 <br> Gabriela Mathieu
+]
+.subtitle[
+## Escuela de Invierno - Julio 2022 <br> Gabriela Mathieu
+]
+.author[
 ### <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+]
 
 ---
 
@@ -54,482 +61,11 @@ class: center, middle, inverse, title-slide
 
 # ¿Qué haremos hoy?
 
-- Buenas prácticas al escribir código en R
-
 - Escribir funciones en R
 
 - Estructura de una función
 
 - Programación defensiva
-
----
-# Buenas prácticas al escribir código R
-
-- Usa un estilo coherente dentro de tu código.
-&lt;br&gt;&lt;br&gt;
---
-
-- La coherencia hace que el código sea más fácil de leer y los problemas más fáciles de detectar.
-&lt;br&gt;&lt;br&gt;
---
-
-- Mantener en lo posible los scripts, datos, salidas en un mismo directorio.
-&lt;br&gt;&lt;br&gt;
---
-
-- Usa rutas relativas para acceder a esos archivos.
-&lt;br&gt;&lt;br&gt;
---
-
--  Usa Rproj y el paquete here
-&lt;br&gt;&lt;br&gt;
---
-
-- Usa control de versiones aunque trabajes de forma individual.
-&lt;br&gt;&lt;br&gt;
---
-
-- No guardes el espacio de trabajo (workspace), esto puede generar resultados inesperados. Empieza en un entorno limpio cada vez.
-&lt;br&gt;&lt;br&gt;
---
-
-- Evita el hard-coding!
-
----
-# ~~Save workspace~~
-
-
-&lt;img src="img/funciones/saveworkspace.gif" width="30%" style="display: block; margin: auto;" /&gt;
- 
-    
-&lt;!-- Todo esto nos lleva a escribir funciones para hacer nuestro código más legible y modular. --&gt;
-
-
----
-# Nombres
-
-- Es preferible que los nombres de los objetos, archivos y funciones propias sean en minúscula. 
-- Si tienen más de un término que estén separados por guión bajo (_) 
-- Uno de los creadores de Tidyverse, Hadley Wickham recomienda usar sustantivos para los nombres de los objetos y verbos para las funciones
-- Elegir nombres concisos y descriptivos para los objetos y las funciones.
-- No utilizar tildes y eñes en los nombres de los objetos ni las funciones.
-- Los scripts de R deben terminar con la extensión .R
-- Evita usar nombres de funciones comunes, palabras reservadas o valores predeterminados de R para nombrar a tus objetos o funciones
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-dia_uno
-dia_1
-```
-]
-]
-
-.pull-right[
-.code-bg-skyblue[
-
-```r
-# -1
-DiaUno
-diauno
-día_uno
-
-T &lt;- FALSE
-c &lt;- 10
-mean &lt;- function(x) sum(x)
-```
-]
-
-]
-
-
----
-# Uso de los espacios
-
-Antes y después de la mayoría de los operadores hay que dejar un espacio. 
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-x &lt;- sqrt(2 + 4 -1)
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-x &lt;- sqrt(2+4-1)
-```
-]
-]
-&lt;br&gt;&lt;br&gt;
---
-
-
-Las excepciones a esta regla son cuando usamos `:`, `::`, `$`, `^`, etc. 
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-vector &lt;- 1:10
-dplyr::select(1)
-x &lt;- sqrt(y^2 + z^4)
-df$x
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-vector &lt;- 1 : 10
-dplyr :: select(1)
-x &lt;- sqrt(y ^ 2 + z ^ 4)
-df $x
-```
-]
-]
---
-
----
-# Uso de los espacios
-
-No hay que dejar espacios antes de una coma, pero sí después.
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1 
-v &lt;- c(1, 2, 3)
-x[, 1]
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-v &lt;- c(1,2,3)
-x[ ,1]
-x[,1]
-x[ , 1]
-```
-]
-]
-
---
-
-Antes del paréntesis izquierdo va un espacio, a no ser que estemos llamando a una función.
-
-Dejar un espacio antes y después de () cuando se utiliza if, for o while
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-if (x &gt; 2) {
-  print(x)
-}
-
-
-mean(1:10)
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-if(x&gt;2){
-  print(x)
-}
-
-mean (1:10)
-mean( 1:10)
-```
-]
-]
-
----
-# Uso de espacios (función propia)
-
-Agrega un espacio después de ()
-
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-function(x) {}
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-function (x) {}
-function(x){}
-```
-]
-]
-
----
-# Uso del punto y coma
-
-- Se recomienda no usar punto y coma para escribir en la misma línea dos o más expresiones
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-x &lt;- 1
-y &lt;- 2
-z &lt;- 3
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-x &lt;- 1; y &lt;- 2; z &lt;- 3
-```
-]
-]
-
-
----
-# Uso de llaves
-
-- Al abrir una llave, el bloque de código debe agregarse en una siguiente línea 
-- El bloque de código al interior de las llaves debe estar alineado a dos espacios
-- La llave que cierra siempre tiene que ir su propia línea, a menos que se trate de else. 
-- En general, usaremos llaves aunque el cuerpo de la estructura de control contenga sólo una instrucción.
-
-Dentro de las llaves utilizaremos sangrado para indicar que se trata de un bloque de instrucciones.
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-if (x &lt; 2) {
-  "mayor"
-} else {
-  "menor"
-}
-
-if (x == 0) {
-  "cero"
-}
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1 
-if (1 &lt; 2) 
-{
-"mayor"
-} 
-else {
-"menor"
-}
-
-if (x == 0) 
-"cero"
-```
-]
-]
-
----
-# Asignación
-
-En la instrucción de asignación se aconseja el uso del operador &lt;- en lugar de =, reservando este último para declarar argumentos dentro de las funciones.
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-# +1
-x &lt;- 2
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-# -1
-x = 2
-x&lt;-2
-```
-]
-]
-
----
-# Longitud de lineas
-
-Trata de limitar tu código a una longitud de 80 caracteres por linea. 
-
-Esto cabe cómodamente en una página impresa a un tamaño de la fuente razonable.
-
-![](img/funciones/longitud_codigo.gif)&lt;!-- --&gt;
-
----
-# Sangría o espacios extras
-
-- Usa dos espacios para añadir una sangría a tu código.
-- Podés setear la tecla TAB para que deje por defecto dos espacios. 
-- Una excepción es para alinear los argumentos de una función.
-
-
-```r
-nombre_de_funcion &lt;- function(argumento_1 = NULL,
-                              argumento_2 = "2020-06-11",
-                              argumento_3 = "") {
-  # desde aquí usamos la sangría de dos espacios otra vez
-}
-```
-
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-df &lt;- df %&gt;% mutate(
-  x = y*z,
-  x2 = x*2
-)
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-]
-]
-
----
-# Evita el hard-coding
-
-Otra forma de ser explícito sobre los requisitos de tu código y mejorar su reproducibilidad es limitar el "hard-coding" de los archivos de entrada y salida de tu script. Si su código va a leer datos de un archivo, defina una variable al principio de su código que almacene la ruta a ese archivo. Por ejemplo
-
-En el caso de las funciones, agrega las rutas como argumentos
-
-
-.pull-left[
-.code-bg-palegreen[
-
-```r
-input_file &lt;- "data/athletes.csv" 
-output_file &lt;- "data/athletes_tidy.csv"
-
-# lee los datos
-input_data &lt;- read.csv(input_file)
-# guarda los datos
-write.table(input_data, output_file)
-```
-]
-]
-
-.pull-left[
-.code-bg-skyblue[
-
-```r
-input_data &lt;- read.csv("data/athletes.csv")
-write.table(input_data, "data/athletes_tidy.csv")
-```
-]
-]
-
----
-# ~~setwd()~~ ~~rm(list = ls())~~
-
-&lt;img src="img/funciones/hadley_jenny.png" width="634" 200% /&gt;
-
-.pull-left[
-&lt;img src="img/funciones/jenny1.jpeg" width="1037" height="10%" /&gt;
-
-]
-
-.pull-right[
-&lt;img src="img/funciones/jenny2.jpeg" width="1012" height="10%" /&gt;
-
-
-]
----
-# Comenta el script y crea secciones
-
-Recomendamos documentar el código mediante el uso de comentarios. Cada linea debe comenzar con el signo numeral (#) seguido de un espacio en blanco.
-
-Con cuatro numerales a la derecha se crean secciones 
-
-&lt;img src="img/funciones/secciones.gif" height="10%" /&gt;
-
----
-# Orden dentro de un script
-
-- Carga todos los paquetes al inicio: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;pacman::p_load()&lt;/span&gt;
-&lt;br&gt;&lt;br&gt;
---
-
-- Define las opciones globales, rutas al inicio
-&lt;br&gt;&lt;br&gt;
---
-
-- Llama a todo el código al principio: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;source()&lt;/span&gt;
-&lt;br&gt;&lt;br&gt;
---
-
-- En lo posible llama a todos los archivos de datos en la parte superior
-
-
-&lt;img src="img/funciones/code_order.png" width="434" 100% /&gt;
-
----
-# Paquete styler 
-
-- Además del atajo CTRL + SHIFT + a para estilizar el código hay paquetes específicos.
-- Al instalarlo se agrega un addin. 
-- Se puede definir el [estilo de tidyverse](https://style.tidyverse.org/index.html)
-- Otro paquete similar es lintr.
-
-![](img/funciones/styler.gif)&lt;!-- --&gt;
----
-Ejemplo
-
-
-![](img/funciones/hard_coding.gif)&lt;!-- --&gt;
 
 ---
 class: inverse, center, middle
@@ -948,6 +484,9 @@ for (i in 1:length(data_names)) {
 - [R for Data Science](https://r4ds.had.co.nz/functions.html)
 - [Advanced R](http://adv-r.had.co.nz/Style.html)
 - [Best coding practices for R](https://bookdown.org/content/d1e53ac9-28ce-472f-bc2c-f499f18264a3/)
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -997,6 +536,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
